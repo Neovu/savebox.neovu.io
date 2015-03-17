@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Savenergy</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <link rel="stylesheet" href="css/ionic.css">
+
+        <script src="js/ionic.js"></script>
+        <script src="js/ionic-angular.js"></script>
+
+        <!-- Needed for Cordova/PhoneGap -->
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
+        <script src="js/app.js"></script>
+    </head>
+    <body ng-app="savenergy" ng-controller="SavenergyCtrl">
+    <side-menus>
+
+        <!-- Center content -->
+        <pane side-menu-content>
+            <header class="bar bar-header bar-positive">
+                <button class="button button-icon" ng-click="toggleAmbiences()">
+                    <i class="icon ion-navicon"></i>
+                </button>
+                <h1 class="title">{{activeAmbience.title}}</h1>
+                <!-- New Plug button-->
+                <button class="button button-clear" ng-click="newPlug()">
+                    New
+                </button>
+            </header>
+            <content has-header="true" scroll="true">
+                <div class="card" ng-repeat="plug in activeAmbience.plugs">
+                    <div class="item item-divider" >
+                        {{plug.title}}
+                    </div>
+                    <div class="item item-text-wrap">
+                        <a class="item item-thumbnail-left" href="#" style="background-color: #00aadb">
+                            <img src="http://savenergy.me/img/logo-alfa.svg" alt="">
+                            <h2>{{plug.title}}</h2>
+                            <p>{{plug.title}}</p> 
+                        </a>
+                    </div>
+                    <div class="item item-divider">
+                        <span class="badge badge-assertive">0</span>
+                        <label class="toggle toggle-assertive">
+                            <input type="checkbox">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+            </content>
+        </pane>
+
+        <!-- Left menu -->
+        <side-menu side="left">
+            <header class="bar bar-header bar-positive">
+                <h1 class="title">Ambientes</h1>
+                <button class="button button-icon" ng-click="newAmbience()">
+                    <i class="ion ion-plus"></i>
+                </button>
+            </header>
+            <content has-header="true" scroll="false">
+
+                <list>
+                <item ng-repeat="ambience in ambiences" ng-click="selectAmbience(ambience)" ng-class="{active: activeAmbience == ambience}">
+                    {{ambience.title}}
+                </item>
+                </list>
+            </content>
+        </side-menu>
+
+    </side-menus>
+    <script id="new-plug.html" type="text/ng-template">
+
+        <div class="modal">
+
+        <!-- Modal header bar -->
+        <header class="bar bar-header bar-secondary">
+        <h1 class="title">Novo Plug</h1>
+        <button class="button button-clear button-positive" ng-click="closeNewPlug()">Cancelar</button>
+        </header>
+
+        <!-- Modal content area -->
+        <content has-header="true">
+
+        <form ng-submit="createPlug(plug)">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="Tag" ng-model="plug.title">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Descrição" ng-model="plug.title">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Fabricante" ng-model="plug.title">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Marca" ng-model="plug.title">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Tipo" ng-model="plug.title">
+                    <i class="icon ion-ios7-telephone-outline"></i>
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Energia" ng-model="plug.title">
+                    <i class="icon ion-ios7-telephone-outline"></i>
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Eficiência Energética" ng-model="plug.title">
+                    <i class="icon ion-ios7-telephone-outline"></i>
+                </label> 
+                
+                 
+            </div>
+    
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Criar</button>
+            </div>
+        </form>
+
+        </content>
+
+        </div>
+
+    </script>
+</body>
+</html>

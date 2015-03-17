@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title> BioSCADA - Dashbord</title> 
+        <script src="../lib/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="../lib/amcharts/amcharts.js" type="text/javascript"></script> 
+        <script src="../lib/amcharts/serial.js" type="text/javascript"></script>
+        <script src="../lib/amcharts/amstock.js" type="text/javascript"></script>
+        <link href="../css/reset.css" rel="stylesheet" type="text/css"/>
+
+        <style type='text/css'>
+            body
+            { 
+                color: #444;
+                background-color:#f2f2f2;
+                font: 12pt Open Sans, Arial, sans-serif;   
+            }
+
+            .amChartsButtonSelected
+            {
+                background-color:#f3f3f3;
+                border-style:solid;
+                border-color:#f3f3f3;
+                border-width:1px;
+                color:#444;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                margin: 1px;   
+            }
+
+            .amChartsButton
+            {
+                background-color:#f3f3f3;
+                border-style:solid;
+                border-color:#444;
+                border-width:1px;
+                color:#444;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                margin: 1px;  
+            }
+
+            .amChartsCompareList
+            {
+                border-style:solid;
+                border-color:#dbdbdb;
+                border-width:1px;
+            }
+            .padding{
+                padding: 12px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="chartdiv" class="padding"></div> 
+        <script type='text/javascript'>
+            var chartData = [];
+            var chart = null;
+            var start = false;
+            var last = 0;
+
+            function createChart() {
+                var h = window.innerHeight - 24;
+                var w = window.innerWidth - 24;
+                var chartdiv = document.getElementById("chartdiv");
+                chartdiv.style.width = w + 'px';
+                chartdiv.style.height = h + 'px';
+
+                chart = AmCharts.makeChart("chartdiv", {
+                    "theme": "none",
+                    "type": "serial",
+                    "pathToImages": "../lib/amcharts/images/",
+                    "exportConfig": {
+                        "menuTop": "50px",
+                        "menuRight": "20px",
+                        "menuItems": [{
+                                "icon": '../lib/amcharts/images/export.png',
+                                "format": 'png'
+                            }]
+                    },
+                    "dataProvider": chartData,
+                    "valueAxes": [{
+                            "id": "v1",
+                            "axisAlpha": 0,
+                            "inside": true
+                        }],
+                    "graphs": [{
+                            "useNegativeColorIfDown": true,
+                            "balloonText": "[[category]]<br><b>score: [[value]]</b>",
+                            "bullet": "round",
+                            "bulletBorderAlpha": 1,
+                            "bulletBorderColor": "color",
+                            "hideBulletsCount": 50,
+                            "lineThickness": 2,
+                            "lineColor": "#3d98c1",
+                            "negativeLineColor": "#f07e82",
+                            "valueField": "points"
+                        }],
+                    "chartCursor": {
+                        "categoryBalloonEnabled": false,
+                        "cursorAlpha": 0,
+                        "zoomable": false
+                    },
+                    "categoryField": "plugs"
+                });
+
+                start = true;
+            }
+
+
+            AmCharts.ready(function () {
+
+                if (chart) {
+                    chart.clear();
+                }
+
+                if (sessionStorage.logObject) {
+                    var logObject = JSON.parse(sessionStorage.logObject);
+
+                    chartData.push({
+                        plugs: "plug 1",
+                        points: logObject.R,
+                        color: "#fdf27e"
+                    });
+                    chartData.push({
+                        "plugs": "plug 2",
+                        "points": logObject.C,
+                        "color": "#444"
+                    });
+                    chartData.push({
+                        "plugs": "plug 3",
+                        "points": logObject.D,
+                        "color": "#8688c7"
+                    });
+ 
+                    createChart();
+
+                    chart.validateData();
+
+                    $('a').attr("target", "_blank");
+                }
+            });
+
+        </script>
+
+
+    </body>
+
+
+</html>
+

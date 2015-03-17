@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Line Chart</title>
+		<script src="js/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/stylesavenergy.css" >
+	</head>
+	<body>
+    <div class="header">
+      <div class="savenergy-logo"></div>
+        <div class="page-title"></div>
+        <div class="gray-bar">Savenergy&trade; </div>
+    </div>
+  <p id="Saveenergy">__SL_G_U20</p>    
+  
+  <tr>
+<td dir=LTR> Date System: </td>
+<td dir=LTR>__SL_G_S.J</td>
+</tr>
+
+  
+  </body>  
+		<div style="width:30%">
+			<div>
+				<canvas id="canvas" height="450" width="600"></canvas>       
+			</div>
+		</div>
+
+
+	<script>
+		var randomScalingFactor = function(){ return Math.round(Math.random()*900)};
+    var returnPost = ['__SL_G_U00',
+    '__SL_G_U01',
+    '__SL_G_U02',
+    '__SL_G_U03',
+    '__SL_G_U04',
+    '__SL_G_U05',
+    '__SL_G_U06',
+    '__SL_G_U07',
+    '__SL_G_U08',
+    '__SL_G_U09',
+    '__SL_G_U10',
+    '__SL_G_U11',
+    '__SL_G_U12',
+    '__SL_G_U13',
+    '__SL_G_U14',
+    '__SL_G_U15',
+    '__SL_G_U16',
+    '__SL_G_U17',
+    '__SL_G_U18',
+    '__SL_G_U19'];
+    
+    var returnPost20 ='__SL_G_U20';
+    
+    var adc=[];
+    var timestamp=[];
+        for (i = 0; i < 20; i++) { 
+      
+      n = returnPost[i].indexOf(",");
+      adc[i]=returnPost[i].substring(0, n);
+      timestamp[i] = returnPost[i].substring(n+1, returnPost[i].length);
+
+    }
+   
+		var lineChartData = {
+			labels : timestamp,
+			datasets : [
+				{ 
+					label: "dataset",
+					fillColor : "rgba(151,187,205,0.2)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(151,187,205,1)",
+					data : adc
+				}
+			]
+
+		}
+
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myLine = new Chart(ctx).Line(lineChartData, {
+			responsive: true
+		});
+	}
+
+
+	</script>
+	</body>
+</html>

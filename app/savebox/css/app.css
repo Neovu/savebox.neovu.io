@@ -1,0 +1,66 @@
+html { overflow: hidden; }
+body { 
+    font: 14pt Open Sans, Arial, sans-serif;   
+    height: 100%;
+    width: 100%;
+    margin: 0 0;
+}
+
+iframe { 
+
+    width: 100%;
+    height: 100%;
+    
+
+    /* box-shadow: 0px 0px 1px #f3f3f3; */
+    
+
+    overflow: hidden;
+
+}
+section { 
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+}
+.tabs-calm > .tabs, .tabs.tabs-calm {
+border-color: #00AADB;
+background-color: #00AADB;
+background-image: linear-gradient(0deg, #00AADB, #00AADB 50%, transparent 50%);
+color: #fff;
+}
+.bar.bar-calm {
+    background-color: #00AADB;
+    border-color: #00AADB;
+    background-image: linear-gradient(0deg,#4eaccf,#4eaccf 50%,transparent 50%);
+    color: #f2f2f2;
+}
+
+.bar-calm .button {
+border-color: #f3f3f3;
+background-color: #f3f3f3;
+color: #444;
+}
+.item.item-calm {
+    color: #444;
+    background-color: #f3f3f3;
+    border-color: #4eaccf;
+    font-weight: bold;
+}
+.calm-bg { 
+    background-color: #4eaccf; 
+}
+ 
+@media screen and (max-device-width: 640px){
+    .fade-bar {
+        height: 20px;
+        width: 100%;
+        position: fixed;
+        z-index: 9999;
+        opacity: 0;
+        background-color: #000;
+    }
+}

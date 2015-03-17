@@ -1,0 +1,31 @@
+<ion-view title="{{navTitle}}">
+    <ion-nav-bar align-title="left" class="bar-calm"> 
+        <h1 class="title">{{navCount}}</h1>
+        <div class="buttons">
+            <button class="button">{{navCount}}/4</button>
+        </div>
+    </ion-nav-bar>
+    <ion-content has-header="true"> 
+
+        <div class="list">
+            <!--        <ion-item ng-repeat="pet in pets" type="item-text-wrap" href="#/tab/pet/{{pet.id}}">-->
+            <div ng-repeat="pet in pets" class="list">
+
+                <label class="item item-input">
+                    <h2 style='background-color: {{pet.color}}' class="button button-stable" >{{pet.value}}</h2>  
+                    <div class="input-label">
+                        <h3>{{pet.title}} </h3>  
+                    </div> 
+                    <!--                    <div ng-bind-html="pet.description | to_trusted"></div>-->
+
+                </label>
+                <div class="item range range-calm"> 
+                    <input id="pet-{{pet.id}}" type="range" name="volume" min="0" max="1" ng-model="pet.value" ng-change="changeResults(pet.id)"> 
+                </div>
+
+            </div>
+
+        </div> 
+        <button class="item">Preciso de ajuda</button>  
+    </ion-content>
+</ion-view>
