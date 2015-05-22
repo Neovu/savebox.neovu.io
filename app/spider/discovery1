@@ -1,0 +1,10 @@
+{
+  "saveId": "SN12345678",
+  "deviceType": "savePlug",
+  "ipAddress": "192.168.3.101",
+  "date": "2015-05-20",
+  "time": "15:26:25",
+  "name": "Abajur",
+  "location": "quarto",
+  "response": "ACK"
+}

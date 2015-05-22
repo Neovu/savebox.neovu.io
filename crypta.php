@@ -372,11 +372,13 @@ function login_android($username, $password) {
 //            //   var_dump($user);
 //            return $result->id;
             $response["username"] = $user->username;
+            $response["name"] = $user->username;
             $response["email"] = $user->email;
             $response["message"] = "Welcome, " . $user->username;
             die(json_encode($response));
         } else {
             $response["username"] = "";
+            $response["name"] = "";
             $response["email"] = "";
             $response["message"] = "User or Pass invalid.";
             die(json_encode($response));
@@ -384,6 +386,7 @@ function login_android($username, $password) {
     } else {
         $response["username"] = "";
         $response["email"] = "";
+        $response["name"] = "";
         $response["message"] = "Well, something is wrong!";
         die(json_encode($response));
     }
@@ -461,15 +464,15 @@ function signup_android($username, $password) {
         $response['username'] = $username; // add username
         $response['name'] = $username; // add username
         $response['email'] = $email; // add email
-        $response["message"] = JText::sprintf(JText::_('COM_USERS_REGISTRATION_COMPLETE_ACTIVATE') );
-        
+        $response["message"] = JText::sprintf(JText::_('COM_USERS_REGISTRATION_COMPLETE_ACTIVATE'));
+
         die(json_encode($response));
     } else {
         $response['username'] = $username; // add username
         $response['name'] = $username; // add username
         $response['email'] = $email; // add email
-        
-        $response["message"] = JText::sprintf(JText::_('COM_USERS_REGISTER_EMAIL1_MESSAGE') );
+
+        $response["message"] = JText::sprintf(JText::_('COM_USERS_REGISTER_EMAIL1_MESSAGE'));
         die(json_encode($response));
     }
 }
@@ -629,7 +632,7 @@ function signup_android2($username, $password) {
                     }
                     // $return = JFactory::getMailer()->sendMail('sender email', 'sender name', $user->email, $emailSubject, $emailBody);
                     //  $return = JFactory::getMailer()->sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
-
+                    $response['name'] = $username; // add username
                     $response['username'] = $username; // add username
                     $response['email'] = $email; // add email
                     $response["message"] = "Your account has been created and a verification link has been sent to the email address you entered. Note that you must verify the account by clicking on the verification link when you get the email and then an administrator will activate your account before you can login.";
@@ -638,6 +641,7 @@ function signup_android2($username, $password) {
             }
         }
     } else {
+        $response['name'] = $username; // add username
         $response['username'] = $username; // add username
         $response['email'] = $email; // add email
         $response["message"] = "allowUserRegistration=false";
@@ -647,6 +651,7 @@ function signup_android2($username, $password) {
 
 function forgot_android($username, $password) {
     $response["username"] = $username;
+    $response['name'] = $username; // add username
     $response["email"] = $password;
     $response["message"] = "Message will be send to you.";
     die(json_encode($response));
@@ -654,6 +659,7 @@ function forgot_android($username, $password) {
 
 function notification_android($username, $notification) {
     $response["username"] = $username;
+    $response['name'] = $username; // add username
     $response["notification"] = $notification;
     $response["message"] = "Message will be send to you.";
     die(json_encode($response));
