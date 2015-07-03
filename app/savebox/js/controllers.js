@@ -84,7 +84,7 @@ angular.module('starter.controllers', [])
          .controller('PersonCtrl', function ($scope, PetService) {
             $scope.navTitle = "Perfil";
             $scope.navCount = 0;
-            document.getElementById("profile").innerHTML = "<iframe src=\"http://www.savenergies.com\"  ></iframe>";
+            document.getElementById("profile").innerHTML = "<iframe src=\"http://www.savebox.neovu.io\"  ></iframe>";
              
         })
          .controller('ConfigCtrl', function ($scope, PetService) {
