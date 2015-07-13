@@ -5,20 +5,18 @@ if ($user->guest) {
     $idname = "convidado";
 } else {
     $idadmin = $user->id;
-    $idname = $user->username;
+    //$idname = $user->username;
 }
 ?>
  
 <script type="text/javascript">
-    var idadmin = "<? echo $idadmin; ?>";
-    var idname = "<? echo $idname; ?>";
     
     (function($) {
 
         $(document).ready(function($) {
-            $('body').append("<input type=\"hidden\" value=\"<? echo $idadmin; ?>\" id=\"adminID\" />");
+            $('body').append('<input type="hidden" value="<? echo $idadmin; ?>" id="adminID" />');
             
-            var url = "<div id=\"controlfrog\"><iframe id=\"home-frame\" src=\"controlfrog/layouts/b/layout-1.html\"></iframe><div>";
+            var url = '<div id="controlfrog"><iframe id="home-frame" src="controlfrog/layouts/b/layout-1.html"></iframe><div>';
             $('#rt-mainbody-surround').html(url);
             $('#controlfrog, #home-frame').css("height", window.innerHeight-60);
             
