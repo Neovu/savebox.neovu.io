@@ -22,6 +22,10 @@ if (isset($_REQUEST["action"])) {
             $result = notification_android(utf8_decode(@$_GET['username']), utf8_decode(@$_GET['notification']));
             echo "$result";
             break;
+        case "androidsendmail":
+            $result = sendmail_android(utf8_decode(@$_GET['username']), utf8_decode(@$_GET['email']), utf8_decode(@$_GET['notification']));
+            echo "$result";
+            break;
         case "pulse":
             $result = login_pulse(utf8_decode(@$_GET['login']), utf8_decode(@$_GET['pass']));
             echo "$result";
@@ -664,3 +668,12 @@ function notification_android($username, $notification) {
     $response["message"] = "Message will be send to you.";
     die(json_encode($response));
 }
+
+function sendmail_android($username,$email,  $notification) {
+    $response["username"] = $username;
+    $response['email'] = $email; // add username
+    $response["notification"] = $notification;
+    $response["message"] = "Message will be send to you.";
+    die(json_encode($response));
+}
+
