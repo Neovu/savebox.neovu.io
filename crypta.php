@@ -669,11 +669,28 @@ function notification_android($username, $notification) {
     die(json_encode($response));
 }
 
-function sendmail_android($username,$email,  $notification) {
+function sendmail_android($username, $email, $notification) {
     $response["username"] = $username;
     $response['email'] = $email; // add username
     $response["notification"] = $notification;
-    $response["message"] = "Message will be send to you.";
+
+    define('EMAIL_DEFAULT_FROM_NAME', 'Myself');
+    define('FORM_BLOCK_SENDER_EMAIL', EMAIL_DEFAULT_FROM_ADDRESS);
+    $to = 'contato@neovu.com.br'; //please put ours.
+    $from = 'webmaster@neovu.com.br'; //please put ours.
+
+    $names = filter_var($username, FILTER_SANITIZE_STRING);
+    $emails = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $subjects = filter_var($email, FILTER_SANITIZE_STRING);
+    $messages = filter_var($notification, FILTER_SANITIZE_STRING);
+
+
+    $subject = 'From: ' . $emails . ' : ' . $subjects;
+    if (mail($to, $subject, $messages, 'From: ' . $from)) {
+        $response["message"] = 'success|Obrigado, ' . $names . '. Retornaremos em assim que possível.';
+    } else {
+        $response["message"] = 'error|Opa, ' . $names . ' aconteceu algum problema no envio. Tente direto pelo email contato@neovu.com.br!';
+    }
+        
     die(json_encode($response));
 }
-
